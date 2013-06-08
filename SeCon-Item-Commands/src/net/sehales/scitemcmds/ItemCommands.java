@@ -64,8 +64,11 @@ public class ItemCommands {
 					chat.sendFormattedMessage(sender, ic.getLanguageInfoNode("clearinventory.cant-clear-inventory-msg"));
 				return;
 			}
+		} else if (sender instanceof Player) {
+			if (utils.clearInventory(((Player) sender).getInventory(), "all") == -1)
+				chat.sendFormattedMessage(sender, ic.getLanguageInfoNode("clearinventory.cant-clear-inventory-msg"));
+			return;
 		}
-		chat.sendFormattedMessage(sender, LanguageHelper.INFO_WRONG_ARGUMENTS);
 	}
 
 	@SeConCommandHandler(name = "createitem", help = "<darkaqua>create an item out of the item you are holding in your hand for usage with /item and /give;<darkaqua>usage: /createitem [name]", aliases = "additem", type = CommandType.PLAYER)
@@ -195,6 +198,19 @@ public class ItemCommands {
 		sender.getItemInHand().setAmount(amount);
 	}
 
+	@SeConCommandHandler(name = "openinventory", help = "<darkaqua>open the inventory of another player;<darkaqua>usage: /openinventory [player]", permission = "secon.command.openinventory", aliases = "oi,openinv,invsee", type = CommandType.PLAYER)
+	public void onOpenInventoryCmd(Player player, SeConCommand cmd, String[] args) {
+		if (args.length > 0) {
+			Player p = Bukkit.getPlayer(args[0]);
+			if (p == null) {
+				chat.sendFormattedMessage(player, LanguageHelper.INFO_PLAYER_NOT_EXIST.replace("<player>", args[0]));
+				return;
+			}
+			player.openInventory(p.getInventory());
+		} else
+			chat.sendFormattedMessage(player, LanguageHelper.INFO_WRONG_ARGUMENTS);
+	}
+
 	@SeConCommandHandler(name = "playerhead", help = "<darkaqua>get a player's head;<darkaqua>usage: /playerhead [player]", permission = "secon.command.playerhead", aliases = "head,phead", type = CommandType.PLAYER)
 	public void onPlayerheadCmd(Player player, SeConCommand cmd, String[] args) {
 		if (args.length > 0)
@@ -202,6 +218,11 @@ public class ItemCommands {
 		else
 			player.getInventory().addItem(SeCon.getAPI().getItemUtils().getPlayerHead(player.getName()));
 	}
+
+	//	@SeConCommandHandler(name = "proxytest", type = CommandType.PLAYER)
+	//	public void onProxyTestCmd(Player player, SeConCommand cmd, String[] args) {
+	//		player.openInventory(InventoryProxyManager.createProxy(player.getName(), player.getInventory()).getInventory());
+	//	}
 
 	@SeConCommandHandler(name = "repair", help = "<darkaqua>repair your currently held item or all items;<darkaqua>usage: /repair [all]", additionalPerms = "all:secon.command.repair.all", permission = "secon.command.repair", type = CommandType.PLAYER, aliases = "rep")
 	public void onRepairCmd(Player player, SeConCommand cmd, String[] args) {
@@ -225,5 +246,85 @@ public class ItemCommands {
 				else
 					chat.sendFormattedMessage(player, ic.getLanguageInfoNode("repair.not-repairable"));
 		}
+	}
+
+	@SeConCommandHandler(name = "setboots", help = "<darkaqua>replace the boots of another player(or yourself) with the item you are currently holding in your hand;<darkaqua>usage: /setboots [player]", permission = "secon.command.setboots", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
+	public void onSetBootsCmd(Player player, SeConCommand cmd, String[] args) {
+		if (args.length > 0) {
+			if (SeCon.getAPI().getSeConUtils().hasPermission(player, cmd.getPermission("other"), true)) {
+				boolean offline = false;
+				Player p = Bukkit.getPlayer(args[0]);
+				if (p == null) {
+					p = ReflectionHelper.getOfflinePlayer(args[0], player.getWorld());
+					if (p == null) {
+						chat.sendFormattedMessage(player, LanguageHelper.INFO_PLAYER_NOT_EXIST.replace("<player>", args[0]));
+						return;
+					} else
+						offline = true;
+				}
+				player.setItemInHand(utils.switchArmor(p, player.getItemInHand(), ICUtils.ARMOR_TYPE_BOOTS, offline));
+			}
+		} else
+			player.setItemInHand(utils.switchArmor(player, player.getItemInHand(), ICUtils.ARMOR_TYPE_BOOTS, false));
+	}
+
+	@SeConCommandHandler(name = "setchestplate", help = "<darkaqua>replace the chestplate of another player(or yourself) with the item you are currently holding in your hand;<darkaqua>usage: /setchestplate [player]", permission = "secon.command.setchestplate", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
+	public void onSetChestplateCmd(Player player, SeConCommand cmd, String[] args) {
+		if (args.length > 0) {
+			if (SeCon.getAPI().getSeConUtils().hasPermission(player, cmd.getPermission("other"), true)) {
+				boolean offline = false;
+				Player p = Bukkit.getPlayer(args[0]);
+				if (p == null) {
+					p = ReflectionHelper.getOfflinePlayer(args[0], player.getWorld());
+					if (p == null) {
+						chat.sendFormattedMessage(player, LanguageHelper.INFO_PLAYER_NOT_EXIST.replace("<player>", args[0]));
+						return;
+					} else
+						offline = true;
+				}
+				player.setItemInHand(utils.switchArmor(p, player.getItemInHand(), ICUtils.ARMOR_TYPE_CHESTPLATE, offline));
+			}
+		} else
+			player.setItemInHand(utils.switchArmor(player, player.getItemInHand(), ICUtils.ARMOR_TYPE_CHESTPLATE, false));
+	}
+
+	@SeConCommandHandler(name = "sethelmet", help = "<darkaqua>replace the helmet of another player(or yourself) with the item you are currently holding in your hand;<darkaqua>usage: /sethelmet [player]", permission = "secon.command.sethelmet", aliases = "sethead", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
+	public void onSetHelmetCmd(Player player, SeConCommand cmd, String[] args) {
+		if (args.length > 0) {
+			if (SeCon.getAPI().getSeConUtils().hasPermission(player, cmd.getPermission("other"), true)) {
+				boolean offline = false;
+				Player p = Bukkit.getPlayer(args[0]);
+				if (p == null) {
+					p = ReflectionHelper.getOfflinePlayer(args[0], player.getWorld());
+					if (p == null) {
+						chat.sendFormattedMessage(player, LanguageHelper.INFO_PLAYER_NOT_EXIST.replace("<player>", args[0]));
+						return;
+					} else
+						offline = true;
+				}
+				player.setItemInHand(utils.switchArmor(p, player.getItemInHand(), ICUtils.ARMOR_TYPE_HELMET, offline));
+			}
+		} else
+			player.setItemInHand(utils.switchArmor(player, player.getItemInHand(), ICUtils.ARMOR_TYPE_HELMET, false));
+	}
+
+	@SeConCommandHandler(name = "setleggings", help = "<darkaqua>replace the leggings of another player(or yourself) with the item you are currently holding in your hand;<darkaqua>usage: /setleggings [player]", permission = "secon.command.setleggings", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
+	public void onSetLeggingsCmd(Player player, SeConCommand cmd, String[] args) {
+		if (args.length > 0) {
+			if (SeCon.getAPI().getSeConUtils().hasPermission(player, cmd.getPermission("other"), true)) {
+				boolean offline = false;
+				Player p = Bukkit.getPlayer(args[0]);
+				if (p == null) {
+					p = ReflectionHelper.getOfflinePlayer(args[0], player.getWorld());
+					if (p == null) {
+						chat.sendFormattedMessage(player, LanguageHelper.INFO_PLAYER_NOT_EXIST.replace("<player>", args[0]));
+						return;
+					} else
+						offline = true;
+				}
+				player.setItemInHand(utils.switchArmor(p, player.getItemInHand(), ICUtils.ARMOR_TYPE_LEGGINGS, offline));
+			}
+		} else
+			player.setItemInHand(utils.switchArmor(player, player.getItemInHand(), ICUtils.ARMOR_TYPE_LEGGINGS, false));
 	}
 }
