@@ -8,6 +8,7 @@ import net.sehales.secon.enums.CommandType;
 import net.sehales.secon.utils.ChatUtils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -217,6 +218,22 @@ public class ItemCommands {
 			player.getInventory().addItem(SeCon.getAPI().getItemUtils().getPlayerHead(args[0]));
 		else
 			player.getInventory().addItem(SeCon.getAPI().getItemUtils().getPlayerHead(player.getName()));
+	}
+
+	@SeConCommandHandler(name = "renameitem", help = "<darkaqua>rename the item you are currently holding;<darkaqua>usage: /renameitem [name]", permission = "secon.command.renameitem", aliases = "ri,itemrename,renamei", type = CommandType.PLAYER)
+	public void onRenameItem(Player player, SeConCommand cmd, String[] args) {
+		if (args.length > 0) {
+			ItemStack item = player.getItemInHand();
+
+			if (item == null || item.getType().compareTo(Material.AIR) == 0) {
+				chat.sendFormattedMessage(player, ic.getLanguageInfoNode("renameitem.no-valid-item"));
+				return;
+			}
+
+			String name = chat.formatMessage(chat.getStringOfArray(args, 0));
+			player.setItemInHand(SeCon.getAPI().getItemUtils().setItemName(item, name));
+		} else
+			chat.sendFormattedMessage(player, LanguageHelper.INFO_WRONG_ARGUMENTS);
 	}
 
 	//	@SeConCommandHandler(name = "proxytest", type = CommandType.PLAYER)

@@ -34,6 +34,7 @@ public class ItemCmdCollection extends SeConAddon {
 		addLanguageInfoNode("enchant.available-enchantments", "<gold>Only the following enchantments are available: <enchantments>");
 		addLanguageInfoNode("repair.all-repaired", "<gold>All items has been repaired");
 		addLanguageInfoNode("repair.not-repairable", "<red>You can't repair that item!");
+		addLanguageInfoNode("renameitem.no-valid-item", "<red>Air is not a valid item");
 	}
 
 	@Override
