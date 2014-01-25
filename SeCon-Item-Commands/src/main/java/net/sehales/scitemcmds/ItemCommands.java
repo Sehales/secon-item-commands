@@ -309,13 +309,14 @@ public class ItemCommands {
                 boolean offline = false;
                 Player p = Bukkit.getPlayer(args[0]);
                 if (p == null) {
-                    p = ReflectionHelper.getOfflinePlayer(args[0], player.getWorld());
-                    if (p == null) {
-                        ChatUtils.sendFormattedMessage(player, lang.PLAYER_NOT_FOUND.replace("<player>", args[0]));
-                        return;
-                    } else {
-                        offline = true;
-                    }
+                    // p = ReflectionHelper.getOfflinePlayer(args[0],
+                    // player.getWorld());
+                    // if (p == null) {
+                    ChatUtils.sendFormattedMessage(player, lang.PLAYER_NOT_FOUND.replace("<player>", args[0]));
+                    return;
+                    // } else {
+                    // offline = true;
+                    // }
                 }
                 player.setItemInHand(utils.switchArmor(p, player.getItemInHand(), ICUtils.ARMOR_TYPE_BOOTS, offline));
             }
@@ -331,13 +332,14 @@ public class ItemCommands {
                 boolean offline = false;
                 Player p = Bukkit.getPlayer(args[0]);
                 if (p == null) {
-                    p = ReflectionHelper.getOfflinePlayer(args[0], player.getWorld());
-                    if (p == null) {
-                        ChatUtils.sendFormattedMessage(player, lang.PLAYER_NOT_FOUND.replace("<player>", args[0]));
-                        return;
-                    } else {
-                        offline = true;
-                    }
+                    // p = ReflectionHelper.getOfflinePlayer(args[0],
+                    // player.getWorld());
+                    // if (p == null) {
+                    ChatUtils.sendFormattedMessage(player, lang.PLAYER_NOT_FOUND.replace("<player>", args[0]));
+                    return;
+                    // } else {
+                    // offline = true;
+                    // }
                 }
                 player.setItemInHand(utils.switchArmor(p, player.getItemInHand(), ICUtils.ARMOR_TYPE_CHESTPLATE, offline));
             }
@@ -353,13 +355,14 @@ public class ItemCommands {
                 boolean offline = false;
                 Player p = Bukkit.getPlayer(args[0]);
                 if (p == null) {
-                    p = ReflectionHelper.getOfflinePlayer(args[0], player.getWorld());
-                    if (p == null) {
-                        ChatUtils.sendFormattedMessage(player, lang.PLAYER_NOT_FOUND.replace("<player>", args[0]));
-                        return;
-                    } else {
-                        offline = true;
-                    }
+                    // p = ReflectionHelper.getOfflinePlayer(args[0],
+                    // player.getWorld());
+                    // if (p == null) {
+                    ChatUtils.sendFormattedMessage(player, lang.PLAYER_NOT_FOUND.replace("<player>", args[0]));
+                    return;
+                    // } else {
+                    // offline = true;
+                    // }
                 }
                 player.setItemInHand(utils.switchArmor(p, player.getItemInHand(), ICUtils.ARMOR_TYPE_HELMET, offline));
             }
@@ -375,13 +378,14 @@ public class ItemCommands {
                 boolean offline = false;
                 Player p = Bukkit.getPlayer(args[0]);
                 if (p == null) {
-                    p = ReflectionHelper.getOfflinePlayer(args[0], player.getWorld());
-                    if (p == null) {
-                        ChatUtils.sendFormattedMessage(player, lang.PLAYER_NOT_FOUND.replace("<player>", args[0]));
-                        return;
-                    } else {
-                        offline = true;
-                    }
+                    // p = ReflectionHelper.getOfflinePlayer(args[0],
+                    // player.getWorld());
+                    // if (p == null) {
+                    ChatUtils.sendFormattedMessage(player, lang.PLAYER_NOT_FOUND.replace("<player>", args[0]));
+                    return;
+                    // } else {
+                    // offline = true;
+                    // }
                 }
                 player.setItemInHand(utils.switchArmor(p, player.getItemInHand(), ICUtils.ARMOR_TYPE_LEGGINGS, offline));
             }

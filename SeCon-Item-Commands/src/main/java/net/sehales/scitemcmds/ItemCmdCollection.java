@@ -36,36 +36,37 @@ public class ItemCmdCollection extends Addon {
     }
     
     @Override
-    protected void onDisable() {
-        
-    }
-    
-    @Override
     protected boolean onEnable() {
         initLanguage();
         initConfig();
         registerListener(new PlayerListener());
         
-        String nmspkg = getConfig().getString("nms-package", "net.minecraft.server");
-        try {
-            Class.forName(nmspkg + ".MinecraftServer");
-        } catch (ClassNotFoundException e) {
-            getLogger().severe("InventoryCmds", "Wrong nms package, please check your config! (must look like 'net.minecraft.server.VERSION'");
-            getLogger().info("InventoryCmds", "Usage of offline player support has been turned off!");
-            ReflectionHelper.setEnabled(false);
-        }
+        // String nmspkg = getConfig().getString("nms-package",
+        // "net.minecraft.server");
+        // try {
+        // Class.forName(nmspkg + ".MinecraftServer");
+        // } catch (ClassNotFoundException e) {
+        // getLogger().severe("InventoryCmds",
+        // "Wrong nms package, please check your config! (it have to look like 'net.minecraft.server.VERSION'");
+        // getLogger().info("InventoryCmds",
+        // "Usage of offline player support has been turned off!");
+        // ReflectionHelper.setEnabled(false);
+        // }
+        //
+        // String cbpkg = getConfig().getString("cb-package",
+        // "org.bukkit.craftbukkit");
+        // try {
+        // Class.forName(cbpkg + ".CraftServer");
+        // } catch (ClassNotFoundException e) {
+        // getLogger().severe("InventoryCmds",
+        // "Wrong cb package, please check your config! (it have to look like 'org.bukkit.craftbukkit.VERSION'");
+        // getLogger().info("InventoryCmds",
+        // "Usage of offline player support has been turned off!");
+        // ReflectionHelper.setEnabled(false);
+        // }
         
-        String cbpkg = getConfig().getString("cb-package", "org.bukkit.craftbukkit");
-        try {
-            Class.forName(cbpkg + ".CraftServer");
-        } catch (ClassNotFoundException e) {
-            getLogger().severe("InventoryCmds", "Wrong cb package, please check your config! (must look like 'org.bukkit.craftbukkit.VERSION'");
-            getLogger().info("InventoryCmds", "Usage of offline player support has been turned off!");
-            ReflectionHelper.setEnabled(false);
-        }
-        
-        ReflectionHelper.setNMSPackage(nmspkg);
-        ReflectionHelper.setCBPackage(cbpkg);
+        // ReflectionHelper.setNMSPackage(nmspkg);
+        // ReflectionHelper.setCBPackage(cbpkg);
         ICUtils utils = new ICUtils(this);
         registerCommandsFromObject(new ItemCommands(this, utils));
         return true;
