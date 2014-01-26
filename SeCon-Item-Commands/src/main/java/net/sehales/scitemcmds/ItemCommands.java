@@ -40,7 +40,7 @@ public class ItemCommands {
         this.utils = utils;
     }
     
-    @MethodCommandHandler(name = "clearinventory", description = "<darkaqua>clear the whole inventory of yourself or another player or remove only a specified item;<darkaqua>usage: /clearinventory", permission = "secon.command.clearinventory", additionalPerms = "other:secon.command.clearinventory.other", aliases = "clearinv,ci")
+    @MethodCommandHandler(name = "clearinventory", description = "<darkaqua>clear the whole inventory of yourself or another player or remove only a specified item", usage = "<darkaqua>usage: /clearinventory", permission = "secon.command.clearinventory", additionalPerms = "other:secon.command.clearinventory.other", aliases = "clearinv,ci")
     public void onClearInventoryCmd(CommandSender sender, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             if (args.length > 1 && MiscUtils.hasPermission(sender, cmd.getPermission("other"), true)) {
@@ -82,7 +82,7 @@ public class ItemCommands {
     }
     
     @SuppressWarnings("deprecation")
-    @MethodCommandHandler(name = "createitem", description = "<darkaqua>create an item out of the item you are holding in your hand for usage with /item and /give;<darkaqua>usage: /createitem [name]", aliases = "additem", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "createitem", description = "<darkaqua>create an item out of the item you are holding in your hand for usage with /item and /give", usage = "<darkaqua>usage: /createitem [name]", aliases = "additem", type = CommandType.PLAYER)
     public void onCreateItemCmd(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             ItemStack stack = player.getItemInHand();
@@ -98,7 +98,7 @@ public class ItemCommands {
         }
     }
     
-    @MethodCommandHandler(name = "enchant", description = "<darkaqua>enchant the item you are currently holding in your hand;<darkaqua>usage: /enchant [silk_touch 1|all 10]", permission = "secon.command.enchant", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "enchant", description = "<darkaqua>enchant the item you are currently holding in your hand", usage = "<darkaqua>usage: /enchant [silk_touch 1|all 10]", permission = "secon.command.enchant", type = CommandType.PLAYER)
     public void onEnchantCmd(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             ItemStack item = player.getItemInHand();
@@ -133,7 +133,7 @@ public class ItemCommands {
         }
     }
     
-    @MethodCommandHandler(name = "give", description = "<darkaqua>give an item to a specified player(must have the permission [permOfThatCmd].[itemid]|[custom item name];<darkaqua>usage: /give [player] [5:1|7|stone]", additionalPerms = "item:secon.command.give.<item>", permission = "secon.command.give")
+    @MethodCommandHandler(name = "give", description = "<darkaqua>give an item to a specified player(must have the permission [permOfThatCmd].[itemid]|[custom item name]", usage = "<darkaqua>usage: /give [player] [5:1|7|stone]", additionalPerms = "item:secon.command.give.<item>", permission = "secon.command.give")
     public void onGiveCmd(CommandSender sender, SeConCommand cmd, String[] args) {
         try {
             if (args.length > 0) {
@@ -172,7 +172,7 @@ public class ItemCommands {
         }
     }
     
-    @MethodCommandHandler(name = "item", description = "<darkaqua>get an item;<darkaqua>usage: /item [5:1|7|stone]", additionalPerms = "item:secon.command.item.<item>", permission = "secon.command.item", aliases = "i", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "item", description = "<darkaqua>get an item", usage = "<darkaqua>usage: /item [5:1|7|stone]", additionalPerms = "item:secon.command.item.<item>", permission = "secon.command.item", aliases = "i", type = CommandType.PLAYER)
     public void onItemCmd(Player player, SeConCommand cmd, String[] args) {
         try {
             if (args.length > 0) {
@@ -203,14 +203,14 @@ public class ItemCommands {
     }
     
     @SuppressWarnings("deprecation")
-    @MethodCommandHandler(name = "iteminfo", description = "<darkaqua>get information about the item in your hand;<darkaqua>usage: /iteminfo", permission = "secon.command.iteminfo", type = CommandType.PLAYER, aliases = "itemdb,getid,id")
+    @MethodCommandHandler(name = "iteminfo", description = "<darkaqua>get information about the item in your hand", usage = "<darkaqua>usage: /iteminfo", permission = "secon.command.iteminfo", type = CommandType.PLAYER, aliases = "itemdb,getid,id")
     public void onItemInfoCmd(Player player, SeConCommand cmd, String[] args) {
         ItemStack item = player.getItemInHand();
         ChatUtils.sendFormattedMessage(player, "" + "id:" + item.getTypeId() + ":" + item.getDurability());
         ChatUtils.sendFormattedMessage(player, "" + item.toString());
     }
     
-    @MethodCommandHandler(name = "more", description = "<darkaqua>get a full stack of the held item or a given number;<darkaqua>usage: /more [10]", permission = "secon.command.more", type = CommandType.PLAYER, aliases = "itemamount,stackitem,stack")
+    @MethodCommandHandler(name = "more", description = "<darkaqua>get a full stack of the held item or a given number", usage = "<darkaqua>usage: /more [10]", permission = "secon.command.more", type = CommandType.PLAYER, aliases = "itemamount,stackitem,stack")
     public void onMoreCmd(Player sender, SeConCommand cmd, String[] args) {
         int amount = 64;
         if (args.length > 0) {
@@ -223,7 +223,7 @@ public class ItemCommands {
         sender.getItemInHand().setAmount(amount);
     }
     
-    @MethodCommandHandler(name = "openinventory", description = "<darkaqua>open the inventory of another player;<darkaqua>usage: /openinventory [player]", permission = "secon.command.openinventory", aliases = "oi,openinv,invsee", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "openinventory", description = "<darkaqua>open the inventory of another player", usage = "<darkaqua>usage: /openinventory [player]", permission = "secon.command.openinventory", aliases = "oi,openinv,invsee", type = CommandType.PLAYER)
     public void onOpenInventoryCmd(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             Player p = Bukkit.getPlayer(args[0]);
@@ -237,7 +237,7 @@ public class ItemCommands {
         }
     }
     
-    @MethodCommandHandler(name = "playerhead", description = "<darkaqua>get a player's head;<darkaqua>usage: /playerhead [player]", permission = "secon.command.playerhead", aliases = "head,phead", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "playerhead", description = "<darkaqua>get a player's head", usage = "<darkaqua>usage: /playerhead [player]", permission = "secon.command.playerhead", aliases = "head,phead", type = CommandType.PLAYER)
     public void onPlayerheadCmd(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             player.getInventory().addItem(ItemUtils.getPlayerHead(args[0]));
@@ -246,7 +246,7 @@ public class ItemCommands {
         }
     }
     
-    @MethodCommandHandler(name = "renameitem", description = "<darkaqua>rename the item you are currently holding;<darkaqua>usage: /renameitem [name]", permission = "secon.command.renameitem", aliases = "ri,itemrename,renamei", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "renameitem", description = "<darkaqua>rename the item you are currently holding", usage = "<darkaqua>usage: /renameitem [name]", permission = "secon.command.renameitem", aliases = "ri,itemrename,renamei", type = CommandType.PLAYER)
     public void onRenameItem(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             ItemStack item = player.getItemInHand();
@@ -270,7 +270,7 @@ public class ItemCommands {
     // player.getInventory()).getInventory());
     // }
     
-    @MethodCommandHandler(name = "repair", description = "<darkaqua>repair your currently held item or all items;<darkaqua>usage: /repair [all]", additionalPerms = "all:secon.command.repair.all", permission = "secon.command.repair", type = CommandType.PLAYER, aliases = "rep")
+    @MethodCommandHandler(name = "repair", description = "<darkaqua>repair your currently held item or all items", usage = "<darkaqua>usage: /repair [all]", additionalPerms = "all:secon.command.repair.all", permission = "secon.command.repair", type = CommandType.PLAYER, aliases = "rep")
     public void onRepairCmd(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("all") && MiscUtils.hasPermission(player, cmd.getPermission("all"), true)) {
@@ -302,7 +302,7 @@ public class ItemCommands {
         }
     }
     
-    @MethodCommandHandler(name = "setboots", description = "<darkaqua>replace the boots of another player(or yourself) with the item you are currently holding in your hand;<darkaqua>usage: /setboots [player]", permission = "secon.command.setboots", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "setboots", description = "<darkaqua>replace the boots of another player(or yourself) with the item you are currently holding in your hand", usage = "<darkaqua>usage: /setboots [player]", permission = "secon.command.setboots", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
     public void onSetBootsCmd(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             if (MiscUtils.hasPermission(player, cmd.getPermission("other"), true)) {
@@ -325,7 +325,7 @@ public class ItemCommands {
         }
     }
     
-    @MethodCommandHandler(name = "setchestplate", description = "<darkaqua>replace the chestplate of another player(or yourself) with the item you are currently holding in your hand;<darkaqua>usage: /setchestplate [player]", permission = "secon.command.setchestplate", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "setchestplate", description = "<darkaqua>replace the chestplate of another player(or yourself) with the item you are currently holding in your hand", usage = "<darkaqua>usage: /setchestplate [player]", permission = "secon.command.setchestplate", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
     public void onSetChestplateCmd(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             if (MiscUtils.hasPermission(player, cmd.getPermission("other"), true)) {
@@ -348,7 +348,7 @@ public class ItemCommands {
         }
     }
     
-    @MethodCommandHandler(name = "sethelmet", description = "<darkaqua>replace the helmet of another player(or yourself) with the item you are currently holding in your hand;<darkaqua>usage: /sethelmet [player]", permission = "secon.command.sethelmet", aliases = "sethead", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "sethelmet", description = "<darkaqua>replace the helmet of another player(or yourself) with the item you are currently holding in your hand", usage = "<darkaqua>usage: /sethelmet [player]", permission = "secon.command.sethelmet", aliases = "sethead", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
     public void onSetHelmetCmd(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             if (MiscUtils.hasPermission(player, cmd.getPermission("other"), true)) {
@@ -371,7 +371,7 @@ public class ItemCommands {
         }
     }
     
-    @MethodCommandHandler(name = "setleggings", description = "<darkaqua>replace the leggings of another player(or yourself) with the item you are currently holding in your hand;<darkaqua>usage: /setleggings [player]", permission = "secon.command.setleggings", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
+    @MethodCommandHandler(name = "setleggings", description = "<darkaqua>replace the leggings of another player(or yourself) with the item you are currently holding in your hand", usage = "<darkaqua>usage: /setleggings [player]", permission = "secon.command.setleggings", additionalPerms = "other:secon.command.setboots", type = CommandType.PLAYER)
     public void onSetLeggingsCmd(Player player, SeConCommand cmd, String[] args) {
         if (args.length > 0) {
             if (MiscUtils.hasPermission(player, cmd.getPermission("other"), true)) {
